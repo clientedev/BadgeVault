@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Badges - Gabriel e Johnny</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                    </svg>
+                    Controle de Badges
+                </h1>
+                <div class="header-users">Gabriel e Johnny</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <div class="container">
+                <div class="input-wrapper">
+                    <h2 class="section-title">Adicionar Aluno</h2>
+                    
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        {% if category == 'success' %}
+                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        {% else %}
+                                            <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        {% endif %}
+                                    </svg>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <form method="POST" action="{{ url_for('add_student') }}" class="input-form">
+                        <div class="form-group">
+                            <label for="profile_url" class="form-label">Link do Perfil</label>
+                            <div class="input-button-group">
+                                <input 
+                                    type="url" 
+                                    id="profile_url" 
+                                    name="profile_url" 
+                                    class="form-input" 
+                                    placeholder="Cole o link do perfil aqui..."
+                                    required
+                                >
+                                <button type="submit" class="btn btn-primary">
+                                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 4v16m8-8H4"></path>
+                                    </svg>
+                                    Adicionar
+                                </button>
+                            </div>
+                            <p class="form-helper">Plataformas suportadas: Google Cloud Skills e Credly</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="metrics-section">
+            <div class="container">
+                <h2 class="section-title">Métricas Gerais</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                        <div class="metric-value">{{ metrics.total_badges }}</div>
+                        <div class="metric-label">Total de Badges</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <div class="metric-value">{{ metrics.total_students }}</div>
+                        <div class="metric-label">Total de Alunos</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <div class="metric-value">{{ metrics.avg_badges }}</div>
+                        <div class="metric-label">Média por Aluno</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="students-section">
+            <div class="container">
+                <h2 class="section-title">Alunos</h2>
+                
+                {% if students %}
+                    <div class="students-grid">
+                        {% for student in students %}
+                            <a href="{{ student.profile_url }}" target="_blank" class="student-card">
+                                <div class="card-header">
+                                    <h3 class="student-name">{{ student.name }}</h3>
+                                    <svg class="external-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                </div>
+                                
+                                <div class="badge-count-display">
+                                    <div class="badge-number">{{ student.badge_count }}</div>
+                                    <div class="badge-label">badges</div>
+                                </div>
+                                
+                                <div class="platform-chip">{{ student.platform }}</div>
+                                
+                                <div class="card-url">{{ student.profile_url }}</div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <h3 class="empty-title">Adicione o primeiro aluno</h3>
+                        <p class="empty-text">Use o formulário acima para adicionar perfis de alunos do Google Cloud Skills ou Credly</p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
