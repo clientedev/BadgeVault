@@ -2,7 +2,7 @@ modules = ["python-3.11"]
 
 [nix]
 channel = "stable-25_05"
-packages = ["openssl", "postgresql", "xcodebuild", "zlib"]
+packages = ["geckodriver", "openssl", "postgresql", "xcodebuild", "zlib", "chromium", "chromedriver"]
 
 [deployment]
 deploymentTarget = "autoscale"
@@ -31,3 +31,17 @@ waitForPort = 5000
 
 [agent]
 integrations = ["web_scraper:1.0.0"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 39005
+externalPort = 3001
+exposeLocalhost = true
+
+[[ports]]
+localPort = 43919
+externalPort = 3000
+exposeLocalhost = true

@@ -2,6 +2,22 @@ import requests
 from bs4 import BeautifulSoup
 import trafilatura
 from urllib.parse import urlparse
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+
+
+def get_selenium_driver():
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu')
+    driver = webdriver.Chrome(options=chrome_options)
+    return driver
 
 
 def scrape_google_cloud_skills(url):
@@ -39,33 +55,48 @@ def scrape_google_cloud_skills(url):
 
 
 def scrape_credly(url):
+    driver = None
     try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
+        driver = get_selenium_driver()
+        driver.get(url)
         
-        soup = BeautifulSoup(response.content, 'lxml')
+        wait = WebDriverWait(driver, 15)
+        try:
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.cr-standard-grid__item, h1")))
+        except:
+            time.sleep(1)
         
-        name_elem = soup.find('h1', class_='profile-name')
-        if not name_elem:
-            name_elem = soup.find('h1')
-            if not name_elem:
-                name_elem = soup.find('div', class_='cr-profile-header__title')
+        page_source = driver.page_source
+        soup = BeautifulSoup(page_source, 'lxml')
         
-        name = name_elem.get_text(strip=True) if name_elem else "Aluno"
+        name = "Aluno"
+        name_selectors = [
+            ('h1', {'class': 'profile-name'}),
+            ('h1', {}),
+            ('div', {'class': 'cr-profile-header__title'}),
+        ]
         
-        badge_elements = soup.find_all('div', class_='cr-badge')
-        if not badge_elements:
-            badge_elements = soup.find_all('a', href=lambda x: x and '/badges/' in x)
+        for tag, attrs in name_selectors:
+            name_elem = soup.find(tag, attrs)
+            if name_elem:
+                name = name_elem.get_text(strip=True)
+                break
         
-        badge_count = len(badge_elements)
+        badge_count = 0
+        badge_containers = soup.find_all('div', class_='cr-standard-grid__item')
+        if badge_containers:
+            badge_count = len(badge_containers)
         
         if badge_count == 0:
-            count_elem = soup.find('span', class_='profile-badge-count')
-            if count_elem:
-                try:
-                    badge_count = int(count_elem.get_text(strip=True))
-                except:
-                    pass
+            badge_links = soup.find_all('a', href=lambda x: x and '/badges/' in x)
+            badge_count = len(badge_links)
+        
+        if badge_count == 0:
+            all_divs = soup.find_all('div')
+            for div in all_divs:
+                class_str = ' '.join(div.get('class', []))
+                if 'badge' in class_str.lower() and 'grid' not in class_str.lower():
+                    badge_count += 1
         
         return {
             'name': name,
@@ -74,15 +105,35 @@ def scrape_credly(url):
         }
     except Exception as e:
         raise Exception(f"Erro ao extrair dados do Credly: {str(e)}")
+    finally:
+        if driver:
+            driver.quit()
 
 
 def scrape_profile(url):
     parsed_url = urlparse(url)
-    domain = parsed_url.netloc.lower()
+    hostname = parsed_url.hostname
     
-    if 'credly.com' in domain:
+    if not hostname:
+        raise Exception("URL inválida. Por favor, insira um link válido.")
+    
+    hostname = hostname.lower()
+    
+    allowed_domains = [
+        'credly.com',
+        'www.credly.com',
+        'skills.google',
+        'www.skills.google',
+        'cloudskillsboost.google',
+        'www.cloudskillsboost.google'
+    ]
+    
+    if hostname not in allowed_domains:
+        raise Exception("Plataforma não suportada. Use links do Google Cloud Skills ou Credly.")
+    
+    if hostname in ['credly.com', 'www.credly.com']:
         return scrape_credly(url)
-    elif 'skills.google' in domain or 'cloudskillsboost.google' in domain:
+    elif 'skills.google' in hostname or 'cloudskillsboost.google' in hostname:
         return scrape_google_cloud_skills(url)
     else:
         raise Exception("Plataforma não suportada. Use links do Google Cloud Skills ou Credly.")
