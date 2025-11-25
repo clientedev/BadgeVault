@@ -1,8 +1,8 @@
-modules = ["python-3.11"]
+modules = ["web", "python-3.11"]
 
 [nix]
 channel = "stable-25_05"
-packages = ["geckodriver", "openssl", "postgresql", "xcodebuild", "zlib", "chromium", "chromedriver"]
+packages = ["chromedriver", "chromium", "geckodriver", "openssl", "postgresql", "xcodebuild", "zlib"]
 
 [deployment]
 deploymentTarget = "autoscale"
@@ -45,3 +45,7 @@ exposeLocalhost = true
 localPort = 43919
 externalPort = 3000
 exposeLocalhost = true
+
+[[ports]]
+localPort = 46269
+externalPort = 3002
