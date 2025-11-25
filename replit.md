@@ -140,6 +140,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+**2025-11-25:** Correções para deploy no Railway
+- Corrigido app.py para não crashar se SESSION_SECRET não estiver definido (usa fallback seguro)
+- Limpo requirements.txt removendo duplicatas e dependências não utilizadas (Selenium)
+- Atualizado nixpacks.toml para usar `pip install` ao invés de `uv sync`
+- Atualizado Procfile com configuração correta do gunicorn
+- Adicionado runtime.txt para especificar Python 3.11
+
 **2024-11-25:** Migration to Replit completed
 - Added SQLite fallback for database (PostgreSQL recommended)
 - Improved error handling and logging
