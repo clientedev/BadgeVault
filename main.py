@@ -12,11 +12,18 @@ def index():
     total_badges = sum(s.badge_count for s in students)
     total_students = len(students)
     avg_badges = round(total_badges / total_students, 1) if total_students > 0 else 0
+    max_badges = max((s.badge_count for s in students), default=0)
+    
+    google_students = [s for s in students if 'Google' in s.platform]
+    credly_students = [s for s in students if 'Credly' in s.platform]
     
     metrics = {
         'total_badges': total_badges,
         'total_students': total_students,
-        'avg_badges': avg_badges
+        'avg_badges': avg_badges,
+        'max_badges': max_badges,
+        'google_count': len(google_students),
+        'credly_count': len(credly_students)
     }
     
     return render_template('index.html', students=students, metrics=metrics)

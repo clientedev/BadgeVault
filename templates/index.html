@@ -6,21 +6,27 @@
     <title>Controle de Badges - Gabriel e Johnny</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <h1 class="header-title">
-                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                    Controle de Badges
-                </h1>
-                <div class="header-users">Gabriel e Johnny</div>
+                <div class="header-left">
+                    <h1 class="header-title">
+                        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                        Controle de Badges
+                    </h1>
+                    <div class="header-subtitle">Sistema de Acompanhamento de Certificações</div>
+                </div>
+                <div class="header-info">
+                    <div class="school-name">Escola SENAI "Morvan Figueiredo" 1.03</div>
+                    <div class="teachers">Professores: Gabriel Eduardo e Johnny Braga</div>
+                </div>
             </div>
         </div>
     </header>
@@ -79,7 +85,7 @@
                 <h2 class="section-title">Métricas Gerais</h2>
                 <div class="metrics-grid">
                     <div class="metric-card">
-                        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg class="metric-icon blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                         </svg>
@@ -88,7 +94,7 @@
                     </div>
                     
                     <div class="metric-card">
-                        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg class="metric-icon green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
                         <div class="metric-value">{{ metrics.total_students }}</div>
@@ -96,11 +102,35 @@
                     </div>
                     
                     <div class="metric-card">
-                        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg class="metric-icon yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                         </svg>
                         <div class="metric-value">{{ metrics.avg_badges }}</div>
                         <div class="metric-label">Média por Aluno</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <svg class="metric-icon red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <div class="metric-value">{{ metrics.max_badges }}</div>
+                        <div class="metric-label">Maior Pontuação</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <svg class="metric-icon blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div class="metric-value">{{ metrics.google_count }}</div>
+                        <div class="metric-label">Google Cloud Skills</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <svg class="metric-icon green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                        <div class="metric-value">{{ metrics.credly_count }}</div>
+                        <div class="metric-label">Credly</div>
                     </div>
                 </div>
             </div>
@@ -109,6 +139,37 @@
         <section class="students-section">
             <div class="container">
                 <h2 class="section-title">Alunos</h2>
+                
+                <div class="filter-section">
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label class="filter-label">Plataforma</label>
+                            <select class="filter-select" id="platform-filter">
+                                <option value="all">Todas</option>
+                                <option value="google">Google Cloud Skills</option>
+                                <option value="credly">Credly</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Ordenar por</label>
+                            <select class="filter-select" id="sort-filter">
+                                <option value="recent">Mais recentes</option>
+                                <option value="badges-desc">Mais badges</option>
+                                <option value="badges-asc">Menos badges</option>
+                                <option value="name">Nome (A-Z)</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">&nbsp;</label>
+                            <button class="btn btn-secondary" onclick="resetFilters()">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                Limpar filtros
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 
                 {% if students %}
                     <div class="students-grid">
@@ -126,7 +187,7 @@
                                     <div class="badge-label">badges</div>
                                 </div>
                                 
-                                <div class="platform-chip">{{ student.platform }}</div>
+                                <div class="platform-chip {% if 'Credly' in student.platform %}credly{% else %}google{% endif %}">{{ student.platform }}</div>
                                 
                                 <div class="card-url">{{ student.profile_url }}</div>
                             </a>
@@ -144,5 +205,67 @@
             </div>
         </section>
     </main>
+    
+    <script>
+        const platformFilter = document.getElementById('platform-filter');
+        const sortFilter = document.getElementById('sort-filter');
+        const studentsGrid = document.querySelector('.students-grid');
+        
+        function applyFilters() {
+            if (!studentsGrid) return;
+            
+            const cards = Array.from(studentsGrid.querySelectorAll('.student-card'));
+            const platformValue = platformFilter.value;
+            const sortValue = sortFilter.value;
+            
+            // Filter by platform
+            cards.forEach(card => {
+                const platformChip = card.querySelector('.platform-chip');
+                const platformText = platformChip.textContent.toLowerCase();
+                
+                if (platformValue === 'all') {
+                    card.style.display = 'flex';
+                } else if (platformValue === 'google' && platformText.includes('google')) {
+                    card.style.display = 'flex';
+                } else if (platformValue === 'credly' && platformText.includes('credly')) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Sort visible cards
+            const visibleCards = cards.filter(card => card.style.display !== 'none');
+            
+            visibleCards.sort((a, b) => {
+                if (sortValue === 'badges-desc') {
+                    const badgesA = parseInt(a.querySelector('.badge-number').textContent);
+                    const badgesB = parseInt(b.querySelector('.badge-number').textContent);
+                    return badgesB - badgesA;
+                } else if (sortValue === 'badges-asc') {
+                    const badgesA = parseInt(a.querySelector('.badge-number').textContent);
+                    const badgesB = parseInt(b.querySelector('.badge-number').textContent);
+                    return badgesA - badgesB;
+                } else if (sortValue === 'name') {
+                    const nameA = a.querySelector('.student-name').textContent.toLowerCase();
+                    const nameB = b.querySelector('.student-name').textContent.toLowerCase();
+                    return nameA.localeCompare(nameB);
+                }
+                return 0;
+            });
+            
+            // Reorder in DOM
+            visibleCards.forEach(card => studentsGrid.appendChild(card));
+        }
+        
+        function resetFilters() {
+            platformFilter.value = 'all';
+            sortFilter.value = 'recent';
+            applyFilters();
+        }
+        
+        platformFilter.addEventListener('change', applyFilters);
+        sortFilter.addEventListener('change', applyFilters);
+    </script>
 </body>
 </html>
