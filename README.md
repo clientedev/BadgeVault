@@ -15,7 +15,7 @@ Sistema para acompanhamento de certificações e badges conquistadas por alunos 
 
 ## 📋 Sobre o Projeto
 
-Este sistema foi desenvolvido para o **SENAI "Morvan Figueiredo" 1.03** pelos professores **Gabriel Eduardo** e **Johnny Braga**, com o objetivo de facilitar o acompanhamento do progresso dos alunos em certificações técnicas do Google Cloud.
+Este sistema foi desenvolvido para o **SENAI "Morvan Figueiredo" 1.03** pelos professores **[Gabriel Eduardo](https://www.linkedin.com/in/gabriel-eduardo-almeida/)** e **[Johnny Braga](https://www.linkedin.com/in/johnny-braga-1b3b1148/)**, com o objetivo de facilitar o acompanhamento do progresso dos alunos em certificações técnicas do Google Cloud.
 
 ## ✨ Funcionalidades
 
@@ -254,11 +254,17 @@ database_url = "sqlite:///students.db"
 <table>
   <tr>
     <td align="center">
+      <a href="https://www.linkedin.com/in/gabriel-eduardo-almeida/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-Gabriel%20Eduardo-0077B5?style=for-the-badge&logo=linkedin" alt="LinkedIn Gabriel Eduardo">
+      </a><br>
       <strong>Gabriel Eduardo</strong><br>
       Professor Instrutor<br>
       SENAI "Morvan Figueiredo" 1.03
     </td>
     <td align="center">
+      <a href="https://www.linkedin.com/in/johnny-braga-1b3b1148/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-Johnny%20Braga-0077B5?style=for-the-badge&logo=linkedin" alt="LinkedIn Johnny Braga">
+      </a><br>
       <strong>Johnny Braga</strong><br>
       Professor Instrutor<br>
       SENAI "Morvan Figueiredo" 1.03
@@ -286,7 +292,7 @@ Este é um projeto educacional fechado. Para sugestões de melhorias:
 ## 📧 Suporte
 
 Para dúvidas, problemas ou sugestões:
-- Contate os professores Gabriel Eduardo ou Johnny Braga
+- Contate os professores [Gabriel Eduardo](https://www.linkedin.com/in/gabriel-eduardo-almeida/) ou [Johnny Braga](https://www.linkedin.com/in/johnny-braga-1b3b1148/)
 - SENAI "Morvan Figueiredo" 1.03
 
 ---
