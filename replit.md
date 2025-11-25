@@ -108,11 +108,20 @@ Preferred communication style: Simple, everyday language.
 
 ## Environment Configuration
 
-**Required Environment Variables:**
-- `SESSION_SECRET` - Flask session encryption key
+**Environment Variables:**
+- `SESSION_SECRET` - Flask session encryption key (automatically provided by Replit, or falls back to development key)
 - `DATABASE_URL` - Database connection string (SQLAlchemy format)
+  - **SQLite Fallback:** If not set, the app uses SQLite (`students.db`) for local development
+  - **PostgreSQL (Recommended for Production):** Create a PostgreSQL database via the Replit Database tool to automatically set this variable
+
+**How to Add PostgreSQL Database:**
+1. Open the Database tool in your Replit workspace
+2. Click "Create a database"
+3. Select PostgreSQL
+4. Replit will automatically provision the database and set the `DATABASE_URL` environment variable
+5. Restart the application to use PostgreSQL instead of SQLite
 
 ## Browser Requirements
 
-- Chrome/Chromium browser installed for Selenium scraping
-- ChromeDriver compatible with installed Chrome version
+- Chrome/Chromium browser installed for Selenium scraping (✓ automatically installed)
+- ChromeDriver compatible with installed Chrome version (✓ automatically installed)
