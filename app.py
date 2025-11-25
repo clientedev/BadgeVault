@@ -12,9 +12,18 @@ class Base(DeclarativeBase):
 db = SQLAlchemy(model_class=Base)
 
 app = Flask(__name__)
+
+import sys
+print("="*60, file=sys.stderr)
+print("INITIALIZING FLASK APP...", file=sys.stderr)
+print(f"Python version: {sys.version}", file=sys.stderr)
+print(f"SESSION_SECRET exists: {bool(os.environ.get('SESSION_SECRET'))}", file=sys.stderr)
+print(f"DATABASE_URL exists: {bool(os.environ.get('DATABASE_URL'))}", file=sys.stderr)
+print(f"PORT env var: {os.environ.get('PORT', 'NOT SET')}", file=sys.stderr)
+print("="*60, file=sys.stderr)
+
 app.secret_key = os.environ.get("SESSION_SECRET")
 if not app.secret_key:
-    import sys
     error_msg = (
         "\n" + "="*60 + "\n"
         "ERROR: SESSION_SECRET environment variable is not set!\n"
@@ -29,7 +38,10 @@ if not app.secret_key:
         "="*60 + "\n"
     )
     print(error_msg, file=sys.stderr)
+    sys.stderr.flush()
     raise RuntimeError("SESSION_SECRET environment variable is not set")
+
+print("✅ SESSION_SECRET configured successfully", file=sys.stderr)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 database_url = os.environ.get("DATABASE_URL")
