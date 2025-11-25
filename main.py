@@ -3,6 +3,14 @@ from models import Student
 from scraper import scrape_profile
 from flask import render_template, request, redirect, url_for, flash
 from sqlalchemy.exc import IntegrityError
+import sys
+
+# Create tables on first import
+print("🔨 Creating database tables...", file=sys.stderr)
+with app.app_context():
+    db.create_all()
+print("✅ Tables ready!", file=sys.stderr)
+sys.stderr.flush()
 
 
 @app.route('/')

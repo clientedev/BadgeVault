@@ -59,12 +59,6 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 
 print("🔧 Initializing database...", file=sys.stderr)
 db.init_app(app)
-
-with app.app_context():
-    import models
-    print("📦 Creating database tables...", file=sys.stderr)
-    db.create_all()
-    print("✅ Database ready!", file=sys.stderr)
-
+print("✅ Database configured", file=sys.stderr)
 print("🚀 Flask app ready!", file=sys.stderr)
 sys.stderr.flush()

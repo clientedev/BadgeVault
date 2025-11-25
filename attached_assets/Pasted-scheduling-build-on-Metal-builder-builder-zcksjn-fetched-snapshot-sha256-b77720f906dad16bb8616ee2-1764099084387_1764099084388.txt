@@ -1,0 +1,66 @@
+scheduling build on Metal builder "builder-zcksjn"
+fetched snapshot sha256:b77720f906dad16bb8616ee262d3632954b790b144253c4b75131bbae2b9cd15 (307 kB bytes)
+[snapshot] fetching snapshot, complete 307 kB [took 561.794121ms]
+using build driver railpack-v0.14.0
+                   
+╭─────────────────╮
+│ Railpack 0.14.0 │
+╰─────────────────╯
+ 
+  ↳ Detected Python
+  ↳ Using pip
+  ↳ Found web command in Procfile
+            
+  Packages  
+  ──────────
+  python  │  3.13.9  │  railpack default (3.13)
+  uv      │  0.9.11  │  railpack default (latest)
+            
+  Steps     
+  ──────────
+  ▸ install
+    $ python -m venv /app/.venv
+    $ pip install -r requirements.txt
+            
+  Deploy    
+  ──────────
+    $ gunicorn --bind=0.0.0.0:$PORT --timeout=120 --workers=1 main:app
+ 
+
+load build definition from ./railpack-plan.json
+0ms
+
+install apt packages: libpq-dev
+3s
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+
+install apt packages: libpq5
+8s
+Processing triggers for libc-bin (2.36-9+deb12u13) ...
+
+install mise packages: python, uv
+2s
+mise uv@0.9.11 ✓ installed
+
+python -m venv /app/.venv
+3s
+
+copy /mise/shims cached
+0ms
+
+copy /mise/installs, /usr/local/bin/mise, /etc/mise/config.toml, /root/.local/state/mise, requirements.txt, pyproject.toml, uv.lock
+3s
+
+pip install -r requirements.txt
+10s
+Successfully installed attrs-25.4.0 babel-2.17.0 beautifulsoup4-4.14.2 blinker-1.9.0 certifi-2025.11.12 charset_normalizer-3.4.4 click-8.3.1 courlan-1.3.2 dateparser-1.2.2 dnspython-2.8.0 email-validator-2.3.0 flask-3.1.2 flask-sqlalchemy-3.1.1 greenlet-3.2.4 gunicorn-23.0.0 h11-0.16.0 htmldate-1.9.4 idna-3.11 itsdangerous-2.2.0 jinja2-3.1.6 justext-3.0.2 lxml-6.0.2 lxml_html_clean-0.4.3 markupsafe-3.0.3 outcome-1.3.0.post0 packaging-25.0 psycopg2-binary-2.9.11 pysocks-1.7.1 python-dateutil-2.9.0.post0 pytz-2025.2 regex-2025.11.3 requests-2.32.5 selenium-4.38.0 six-1.17.0 sniffio-1.3.1 sortedcontainers-2.4.0 soupsieve-2.8 sqlalchemy-2.0.44 tld-0.13.1 trafilatura-2.0.0 trio-0.32.0 trio-websocket-0.12.2 typing-extensions-4.15.0 tzlocal-5.3.1 urllib3-2.5.0 websocket-client-1.9.0 werkzeug-3.1.3 wsproto-1.3.2
+
+copy / /app, /app/.venv, /app
+2s
+
+exporting to docker image format
+2s
+containerimage.digest: sha256:28f55d5e5a9fb182c02fe2250e68bae514bc3f0df1ba70eaef273b7aef37a939
+containerimage.descriptor: eyJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQub2NpLmltYWdlLm1hbmlmZXN0LnYxK2pzb24iLCJkaWdlc3QiOiJzaGEyNTY6MjhmNTVkNWU1YTlmYjE4MmMwMmZlMjI1MGU2OGJhZTUxNGJjM2YwZGYxYmE3MGVhZWYyNzNiN2FlZjM3YTkzOSIsInNpemUiOjIyMDAsImFubm90YXRpb25zIjp7Im9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5jcmVhdGVkIjoiMjAyNS0xMS0yNVQxOToyOToxN1oifSwicGxhdGZvcm0iOnsiYXJjaGl0ZWN0dXJlIjoiYW1kNjQiLCJvcyI6ImxpbnV4In19
+containerimage.config.digest: sha256:9aafea7d9b96e3d7bef811fb917897a094c4b45cac41fee1725082aa3f669f7f
+image push progress: 156 MB/156 MB
