@@ -1,0 +1,107 @@
+🔧 Initializing database...
+✅ Database configured
+🚀 Flask app ready!
+[2025-11-25 19:43:09 +0000] [2] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/main.py", line 3, in <module>
+    from scraper import scrape_profile
+  File "/app/scraper.py", line 3, in <module>
+    import trafilatura
+  File "/app/.venv/lib/python3.11/site-packages/trafilatura/__init__.py", line 16, in <module>
+    from .core import bare_extraction, extract
+  File "/app/.venv/lib/python3.11/site-packages/trafilatura/core.py", line 18, in <module>
+    from .external import compare_extraction
+  File "/mise/installs/python/3.11.7/lib/python3.11/importlib/__init__.py", line 126, in import_module
+  File "/app/.venv/lib/python3.11/site-packages/trafilatura/external.py", line 11, in <module>
+    return _bootstrap._gcd_import(name[level:], package, level)
+    from justext.core import ParagraphMaker, classify_paragraphs, revise_paragraph_classification  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/justext/__init__.py", line 12, in <module>
+    from .core import justext
+  File "/app/.venv/lib/python3.11/site-packages/justext/core.py", line 21, in <module>
+    from lxml.html.clean import Cleaner
+  File "/app/.venv/lib/python3.11/site-packages/lxml/html/clean.py", line 18, in <module>
+    raise ImportError(
+ImportError: lxml.html.clean module is now a separate project lxml_html_clean.
+Install lxml[html_clean] or lxml_html_clean directly.
+[2025-11-25 19:43:09 +0000] [2] [INFO] Worker exiting (pid: 2)
+  File "/mise/installs/python/3.11.7/lib/python3.11/importlib/__init__.py", line 126, in import_module
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/main.py", line 3, in <module>
+    from scraper import scrape_profile
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "/app/scraper.py", line 3, in <module>
+    import trafilatura
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "/app/.venv/lib/python3.11/site-packages/trafilatura/__init__.py", line 16, in <module>
+    from .core import bare_extraction, extract
+  File "/app/.venv/lib/python3.11/site-packages/trafilatura/core.py", line 18, in <module>
+    from .external import compare_extraction
+  File "/app/.venv/lib/python3.11/site-packages/trafilatura/external.py", line 11, in <module>
+    from justext.core import ParagraphMaker, classify_paragraphs, revise_paragraph_classification  # type: ignore
+  File "/app/.venv/lib/python3.11/site-packages/justext/core.py", line 21, in <module>
+    from lxml.html.clean import Cleaner
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2025-11-25 19:43:09 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+ImportError: lxml.html.clean module is now a separate project lxml_html_clean.
+  File "/app/.venv/lib/python3.11/site-packages/justext/__init__.py", line 12, in <module>
+[2025-11-25 19:43:09 +0000] [1] [ERROR] Worker (pid:3) was sent SIGTERM!
+Install lxml[html_clean] or lxml_html_clean directly.
+  File "/app/.venv/lib/python3.11/site-packages/lxml/html/clean.py", line 18, in <module>
+    from .core import justext
+[2025-11-25 19:43:09 +0000] [1] [ERROR] Shutting down: Master
+[2025-11-25 19:43:09 +0000] [3] [INFO] Worker exiting (pid: 3)
+    raise ImportError(
+[2025-11-25 19:43:09 +0000] [1] [ERROR] Reason: Worker failed to boot.
+[2025-11-25 19:43:09 +0000] [3] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

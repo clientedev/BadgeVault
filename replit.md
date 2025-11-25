@@ -146,6 +146,7 @@ Preferred communication style: Simple, everyday language.
 - Atualizado nixpacks.toml para usar `pip install` ao invés de `uv sync`
 - Atualizado Procfile com configuração correta do gunicorn
 - Adicionado runtime.txt para especificar Python 3.11
+- Adicionado `lxml_html_clean` ao requirements.txt (necessário para trafilatura funcionar com lxml 5.x)
 
 **2024-11-25:** Migration to Replit completed
 - Added SQLite fallback for database (PostgreSQL recommended)
