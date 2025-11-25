@@ -39,6 +39,11 @@ body {
     box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
 }
 
+.google-border {
+    height: 4px;
+    background: linear-gradient(90deg, #4285F4 0%, #4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC04 50%, #FBBC04 75%, #34A853 75%, #34A853 100%);
+}
+
 .header-content {
     display: flex;
     justify-content: space-between;
@@ -60,6 +65,12 @@ body {
     flex-shrink: 0;
 }
 
+.badge-icon {
+    font-size: 3rem;
+    color: #FBBC04;
+    flex-shrink: 0;
+}
+
 .brand-text {
     display: flex;
     flex-direction: column;
@@ -75,9 +86,43 @@ body {
 }
 
 .brand-subtitle {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     color: #5f6368;
+    font-weight: 500;
+    margin-top: 0.25rem;
+}
+
+.brand-teachers {
+    font-size: 0.8125rem;
+    color: #4285F4;
     font-weight: 400;
+    margin-top: 0.25rem;
+}
+
+.system-description {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #e8f0fe 0%, #f8f9fa 100%);
+    border-radius: 8px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #4285F4;
+}
+
+.description-icon {
+    font-size: 1.25rem;
+    color: #4285F4;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.system-description p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #3c4043;
 }
 
 .header-meta {
@@ -108,9 +153,8 @@ body {
         padding: 0.875rem 0;
     }
     
-    .logo {
-        width: 40px;
-        height: 40px;
+    .badge-icon {
+        font-size: 2.5rem;
     }
     
     .brand-title {
@@ -118,7 +162,21 @@ body {
     }
     
     .brand-subtitle {
+        font-size: 0.8125rem;
+    }
+    
+    .brand-teachers {
         font-size: 0.75rem;
+    }
+    
+    .system-description {
+        padding: 0.875rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .system-description p {
+        font-size: 0.8125rem;
     }
     
     .header-meta {
@@ -600,4 +658,60 @@ body {
     color: #6b7280;
     max-width: 28rem;
     margin: 0 auto;
+}
+
+.pagination {
+    margin-top: 2rem;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.pagination-btn {
+    min-width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dadce0;
+    background: white;
+    color: #5f6368;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0 0.5rem;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #f8f9fa;
+    border-color: #4285F4;
+    color: #4285F4;
+}
+
+.pagination-btn.active {
+    background: #4285F4;
+    color: white;
+    border-color: #4285F4;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-btn .material-icons {
+    font-size: 1.25rem;
+}
+
+.pagination-dots {
+    color: #5f6368;
+    padding: 0 0.25rem;
+    font-weight: 500;
 }
