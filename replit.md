@@ -144,7 +144,7 @@ Preferred communication style: Simple, everyday language.
 - Removido fallback SQLite (Railway tem filesystem read-only)
 - App agora exige DATABASE_URL obrigatório
 - Adicionado conversão automática de postgres:// para postgresql://
-- requirements.txt com versões fixas para estabilidade
+- Atualizado trafilatura para versão 2.0.0+ (compatível com lxml 5.x)
 - Adicionado `lxml_html_clean` para trafilatura funcionar
 - nixpacks.toml corrigido com `providers = ["python"]` para detecção automática
 - Adicionado `.python-version` com Python 3.11
