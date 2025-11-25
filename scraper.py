@@ -19,7 +19,7 @@ def scrape_google_cloud_skills(url):
         
         badge_elements = soup.find_all('div', class_='profile-badge')
         if not badge_elements:
-            badge_elements = soup.find_all('img', alt=lambda x: x and 'badge' in x.lower())
+            badge_elements = soup.find_all('img', alt=lambda x: bool(x and 'badge' in x.lower()))
         
         badge_count = len(badge_elements)
         

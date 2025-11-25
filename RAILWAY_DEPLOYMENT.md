@@ -21,6 +21,8 @@ Configure as seguintes variáveis de ambiente no painel do Railway:
 - `SESSION_SECRET` - Chave secreta para sessões Flask (OBRIGATÓRIA)
   - Gere uma chave aleatória: `python -c "import secrets; print(secrets.token_hex(32))"`
   - **IMPORTANTE:** A aplicação não iniciará sem esta variável por motivos de segurança
+  - **NUNCA use valores simples como "12345"** - isso é inseguro e pode causar problemas
+  - Exemplo de valor correto: `a8f5f167f44f4964e6c998dee827110c8bd99c17fc07e3d3c3fc2c89b13b7a3d`
 
 #### Recomendadas (PostgreSQL):
 - `DATABASE_URL` - String de conexão do banco de dados PostgreSQL
