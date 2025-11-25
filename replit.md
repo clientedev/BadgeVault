@@ -146,7 +146,8 @@ Preferred communication style: Simple, everyday language.
 - Adicionado conversão automática de postgres:// para postgresql://
 - requirements.txt com versões fixas para estabilidade
 - Adicionado `lxml_html_clean` para trafilatura funcionar
-- nixpacks.toml atualizado com gthread workers
+- nixpacks.toml corrigido com `providers = ["python"]` para detecção automática
+- Adicionado `.python-version` com Python 3.11
 - Adicionado railway.json com configuração explícita
 - SESSION_SECRET gera automaticamente se não definido
 
