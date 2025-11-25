@@ -29,6 +29,9 @@ task = "shell.exec"
 args = "gunicorn --bind 0.0.0.0:5000 --reuse-port --reload main:app"
 waitForPort = 5000
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [agent]
 integrations = ["web_scraper:1.0.0", "python_database:1.0.0"]
 expertMode = true
@@ -38,9 +41,8 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 39005
+localPort = 41667
 externalPort = 3001
-exposeLocalhost = true
 
 [[ports]]
 localPort = 43247
