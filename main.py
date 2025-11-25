@@ -26,7 +26,9 @@ def index():
         'credly_count': len(credly_students)
     }
     
-    return render_template('index.html', students=students, metrics=metrics)
+    students_data = [s.to_dict() for s in students]
+    
+    return render_template('index.html', students=students, students_data=students_data, metrics=metrics)
 
 
 @app.route('/add_student', methods=['POST'])

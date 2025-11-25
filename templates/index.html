@@ -7,7 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -85,52 +87,89 @@
                 <h2 class="section-title">Métricas Gerais</h2>
                 <div class="metrics-grid">
                     <div class="metric-card">
-                        <svg class="metric-icon blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                        </svg>
+                        <span class="material-icons metric-icon blue" style="font-size: 2.5rem;">military_tech</span>
                         <div class="metric-value">{{ metrics.total_badges }}</div>
                         <div class="metric-label">Total de Badges</div>
                     </div>
                     
                     <div class="metric-card">
-                        <svg class="metric-icon green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
+                        <span class="material-icons metric-icon green" style="font-size: 2.5rem;">groups</span>
                         <div class="metric-value">{{ metrics.total_students }}</div>
                         <div class="metric-label">Total de Alunos</div>
                     </div>
                     
                     <div class="metric-card">
-                        <svg class="metric-icon yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
+                        <span class="material-icons metric-icon yellow" style="font-size: 2.5rem;">bar_chart</span>
                         <div class="metric-value">{{ metrics.avg_badges }}</div>
                         <div class="metric-label">Média por Aluno</div>
                     </div>
                     
                     <div class="metric-card">
-                        <svg class="metric-icon red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
+                        <span class="material-icons metric-icon red" style="font-size: 2.5rem;">bolt</span>
                         <div class="metric-value">{{ metrics.max_badges }}</div>
                         <div class="metric-label">Maior Pontuação</div>
                     </div>
                     
                     <div class="metric-card">
-                        <svg class="metric-icon blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        <span class="material-icons metric-icon blue" style="font-size: 2.5rem;">cloud</span>
                         <div class="metric-value">{{ metrics.google_count }}</div>
                         <div class="metric-label">Google Cloud Skills</div>
                     </div>
                     
                     <div class="metric-card">
-                        <svg class="metric-icon green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-                        </svg>
+                        <span class="material-icons metric-icon green" style="font-size: 2.5rem;">workspace_premium</span>
                         <div class="metric-value">{{ metrics.credly_count }}</div>
                         <div class="metric-label">Credly</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="charts-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 0.5rem; color: #4285F4;">analytics</span>
+                    Análise de Desempenho
+                </h2>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <span class="material-icons" style="font-size: 1.25rem; color: #4285F4;">leaderboard</span>
+                            Top 10 Alunos por Badges
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="topStudentsChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <span class="material-icons" style="font-size: 1.25rem; color: #34A853;">pie_chart</span>
+                            Distribuição por Plataforma
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="platformChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <span class="material-icons" style="font-size: 1.25rem; color: #FBBC04;">timeline</span>
+                            Evolução de Cadastros
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="registrationChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <span class="material-icons" style="font-size: 1.25rem; color: #EA4335;">trending_up</span>
+                            Badges por Aluno
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="badgesDistributionChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -207,6 +246,207 @@
     </main>
     
     <script>
+        // Student data from backend
+        const studentsData = {{ students_data | tojson }};
+        
+        // Google colors
+        const googleColors = {
+            blue: '#4285F4',
+            red: '#EA4335',
+            yellow: '#FBBC04',
+            green: '#34A853'
+        };
+        
+        // Chart defaults
+        Chart.defaults.font.family = "'Roboto', sans-serif";
+        Chart.defaults.color = '#5f6368';
+        
+        // 1. Top 10 Students Chart
+        if (studentsData && studentsData.length > 0) {
+            const topStudents = [...studentsData]
+                .sort((a, b) => b.badge_count - a.badge_count)
+                .slice(0, 10);
+            
+            new Chart(document.getElementById('topStudentsChart'), {
+                type: 'bar',
+                data: {
+                    labels: topStudents.map(s => s.name.length > 20 ? s.name.substring(0, 20) + '...' : s.name),
+                    datasets: [{
+                        label: 'Badges',
+                        data: topStudents.map(s => s.badge_count),
+                        backgroundColor: googleColors.blue,
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleFont: { size: 14, weight: 'normal' },
+                            bodyFont: { size: 13 }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e8eaed' },
+                            ticks: { stepSize: 1 }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+            
+            // 2. Platform Distribution Chart
+            const googleCount = studentsData.filter(s => s.platform.includes('Google')).length;
+            const credlyCount = studentsData.filter(s => s.platform.includes('Credly')).length;
+            
+            new Chart(document.getElementById('platformChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Google Cloud Skills', 'Credly'],
+                    datasets: [{
+                        data: [googleCount, credlyCount],
+                        backgroundColor: [googleColors.blue, googleColors.yellow],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { padding: 15, font: { size: 12 } }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12
+                        }
+                    }
+                }
+            });
+            
+            // 3. Registration Timeline Chart
+            const registrationsByDate = {};
+            studentsData.forEach(s => {
+                const date = new Date(s.created_at).toLocaleDateString('pt-BR');
+                registrationsByDate[date] = (registrationsByDate[date] || 0) + 1;
+            });
+            
+            const dates = Object.keys(registrationsByDate).sort((a, b) => {
+                return new Date(a.split('/').reverse().join('-')) - new Date(b.split('/').reverse().join('-'));
+            });
+            
+            let cumulative = 0;
+            const cumulativeData = dates.map(date => {
+                cumulative += registrationsByDate[date];
+                return cumulative;
+            });
+            
+            new Chart(document.getElementById('registrationChart'), {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Total Acumulado',
+                        data: cumulativeData,
+                        borderColor: googleColors.green,
+                        backgroundColor: googleColors.green + '20',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointBackgroundColor: googleColors.green
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e8eaed' },
+                            ticks: { stepSize: 1 }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+            
+            // 4. Badges Distribution Chart
+            const badgeCounts = studentsData.map(s => s.badge_count);
+            const ranges = [
+                { label: '0-5', min: 0, max: 5 },
+                { label: '6-10', min: 6, max: 10 },
+                { label: '11-20', min: 11, max: 20 },
+                { label: '21-50', min: 21, max: 50 },
+                { label: '50+', min: 51, max: Infinity }
+            ];
+            
+            const distribution = ranges.map(range => 
+                badgeCounts.filter(count => count >= range.min && count <= range.max).length
+            );
+            
+            new Chart(document.getElementById('badgesDistributionChart'), {
+                type: 'bar',
+                data: {
+                    labels: ranges.map(r => r.label + ' badges'),
+                    datasets: [{
+                        label: 'Alunos',
+                        data: distribution,
+                        backgroundColor: [
+                            googleColors.blue,
+                            googleColors.green,
+                            googleColors.yellow,
+                            googleColors.red,
+                            '#9334E9'
+                        ],
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e8eaed' },
+                            ticks: { stepSize: 1 }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Filter functionality
         const platformFilter = document.getElementById('platform-filter');
         const sortFilter = document.getElementById('sort-filter');
         const studentsGrid = document.querySelector('.students-grid');
@@ -218,7 +458,6 @@
             const platformValue = platformFilter.value;
             const sortValue = sortFilter.value;
             
-            // Filter by platform
             cards.forEach(card => {
                 const platformChip = card.querySelector('.platform-chip');
                 const platformText = platformChip.textContent.toLowerCase();
@@ -234,7 +473,6 @@
                 }
             });
             
-            // Sort visible cards
             const visibleCards = cards.filter(card => card.style.display !== 'none');
             
             visibleCards.sort((a, b) => {
@@ -254,7 +492,6 @@
                 return 0;
             });
             
-            // Reorder in DOM
             visibleCards.forEach(card => studentsGrid.appendChild(card));
         }
         
@@ -264,8 +501,8 @@
             applyFilters();
         }
         
-        platformFilter.addEventListener('change', applyFilters);
-        sortFilter.addEventListener('change', applyFilters);
+        if (platformFilter) platformFilter.addEventListener('change', applyFilters);
+        if (sortFilter) sortFilter.addEventListener('change', applyFilters);
     </script>
 </body>
 </html>

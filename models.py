@@ -10,5 +10,15 @@ class Student(db.Model):
     platform = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'badge_count': self.badge_count,
+            'profile_url': self.profile_url,
+            'platform': self.platform,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
+
     def __repr__(self):
         return f'<Student {self.name}>'
