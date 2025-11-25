@@ -1,5 +1,6 @@
 [phases.setup]
 nixPkgs = ["chromium", "chromedriver"]
+nixLibs = ["glib", "nss", "nspr", "atk", "cups", "gtk3", "pango", "cairo", "dbus", "libdrm", "mesa", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "expat"]
 
 [phases.install]
 cmds = ["uv sync"]

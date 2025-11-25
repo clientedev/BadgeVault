@@ -53,13 +53,33 @@ Após o deploy:
 
 ## Troubleshooting
 
-### Erro: "Chrome WebDriver não encontrado"
+### Erro: "Chrome WebDriver não encontrado" ou "Status code 127"
 
-**Solução:** Verifique se o arquivo `nixpacks.toml` está presente no repositório e contém:
+**Causas:** ChromeDriver ou Chromium não estão instalados corretamente no Railway.
+
+**Soluções:**
+
+1. **Verifique o arquivo `nixpacks.toml`:** Certifique-se de que ele está presente no repositório e contém:
 ```toml
 [phases.setup]
 nixPkgs = ["chromium", "chromedriver"]
+nixLibs = ["glib", "nss", "nspr", "atk", "cups", "gtk3", "pango", "cairo", "dbus", "libdrm", "mesa", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "expat"]
+
+[phases.install]
+cmds = ["uv sync"]
+
+[start]
+cmd = "gunicorn main:app"
 ```
+
+2. **Verifique os logs de build:** Nos logs do Railway, procure por mensagens indicando se o Chromium foi instalado com sucesso.
+
+3. **Alternativa: Use API direta sem Selenium**
+   - Para Google Cloud Skills: A raspagem funciona sem Selenium (usa apenas requests)
+   - Para Credly: Requer Selenium. Se não funcionar no Railway, considere:
+     - Usar outro serviço de hospedagem que suporte Chromium (Render, Heroku com buildpack)
+     - Implementar raspagem alternativa
+     - Usar API oficial do Credly se disponível
 
 ### Erro: "Internal Server Error" ao adicionar aluno
 
