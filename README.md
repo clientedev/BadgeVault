@@ -222,7 +222,20 @@ database_url = "sqlite:///students.db"
 - ✅ Google Cloud Skills Boost - Funciona
 - ⚠️ Requer configuração adicional
 
-**Consulte:** [RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md) para instruções detalhadas
+**Deploy Automatizado:**
+```bash
+# Execute o script de configuração automática
+python setup_railway.py
+```
+
+O script irá:
+1. ✅ Gerar automaticamente o SESSION_SECRET seguro
+2. ✅ Configurar as variáveis de ambiente no Railway (via CLI)
+3. ✅ Fazer deploy automaticamente
+4. ✅ Salvar backup da configuração em `.railway_config.env`
+
+**Deploy Manual:**  
+Consulte [RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md) para instruções detalhadas
 
 ## 📊 Plataformas Suportadas
 

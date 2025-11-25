@@ -14,11 +14,22 @@ db = SQLAlchemy(model_class=Base)
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET")
 if not app.secret_key:
-    raise RuntimeError(
-        "SESSION_SECRET environment variable is not set. "
-        "This is required for secure session management. "
-        "Generate a secret key with: python -c 'import secrets; print(secrets.token_hex(32))'"
+    import sys
+    error_msg = (
+        "\n" + "="*60 + "\n"
+        "ERROR: SESSION_SECRET environment variable is not set!\n"
+        "="*60 + "\n"
+        "This is required for secure session management.\n\n"
+        "HOW TO FIX IN RAILWAY:\n"
+        "1. Go to your Railway project dashboard\n"
+        "2. Click on 'Variables'\n"
+        "3. Add: SESSION_SECRET=<generated_key>\n"
+        "4. Generate key with: python -c 'import secrets; print(secrets.token_hex(32))'\n"
+        "5. Save and redeploy\n"
+        "="*60 + "\n"
     )
+    print(error_msg, file=sys.stderr)
+    raise RuntimeError("SESSION_SECRET environment variable is not set")
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 database_url = os.environ.get("DATABASE_URL")
