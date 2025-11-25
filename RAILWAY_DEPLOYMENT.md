@@ -34,9 +34,11 @@ Configure as seguintes variáveis de ambiente no painel do Railway:
 
 O Railway detectará automaticamente que é um projeto Python e usará o arquivo `nixpacks.toml` para configurar o ambiente.
 
-**Comando de Start:** `gunicorn main:app`
+**Comando de Start:** `gunicorn --bind=0.0.0.0:$PORT --reuse-port --workers=4 main:app`
 
 Isso já está configurado no arquivo `nixpacks.toml`.
+
+**Importante:** O Railway fornece a porta via variável de ambiente `$PORT`. A aplicação deve escutar em `0.0.0.0:$PORT`.
 
 ### 4. Deploy
 
@@ -82,6 +84,43 @@ O Railway usa Nixpacks, mas o ChromeDriver não consegue executar corretamente m
 - Implemente integração direta sem scraping
 
 ## Troubleshooting
+
+### Erro: "Sua conexão não é particular" / NET::ERR_CERT_AUTHORITY_INVALID
+
+**Causa:** Problema com certificado SSL/HTTPS no Railway.
+
+**Soluções:**
+
+1. **Aguarde alguns minutos** - O Railway pode estar provisionando o certificado SSL. Isso pode levar de 5 a 15 minutos após o primeiro deploy.
+
+2. **Verifique se o deploy foi bem-sucedido:**
+   - Acesse o painel do Railway
+   - Verifique os logs de build e deploy
+   - Certifique-se de que não há erros
+
+3. **Verifique a variável SESSION_SECRET:**
+   - A aplicação requer `SESSION_SECRET` configurada
+   - Sem ela, a aplicação não inicia e o Railway não consegue gerar o certificado
+
+4. **Force um novo deploy:**
+   - Faça um pequeno commit (pode ser só um espaço no README)
+   - Push para o repositório
+   - Aguarde o Railway refazer o deploy
+
+5. **Verifique o comando de start:**
+   - Deve ser: `gunicorn --bind=0.0.0.0:$PORT --reuse-port --workers=4 main:app`
+   - Já está configurado no `nixpacks.toml`
+
+6. **Tente acessar via HTTP primeiro** (temporariamente):
+   - Mude `https://` para `http://` na URL
+   - Se funcionar, é apenas questão de aguardar o certificado
+
+7. **Limpe o cache do navegador:**
+   - Ctrl + Shift + Delete (Chrome/Edge)
+   - Limpe cache e cookies
+   - Tente em janela anônima
+
+**Se persistir:** Entre em contato com o suporte do Railway ou use o Replit (tem SSL automático).
 
 ### Erro: "Chrome WebDriver não encontrado" ou "Status code 127" (Railway + Credly)
 

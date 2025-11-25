@@ -6,4 +6,4 @@ nixLibs = ["glib", "nss", "nspr", "atk", "cups", "gtk3", "pango", "cairo", "dbus
 cmds = ["uv sync"]
 
 [start]
-cmd = "gunicorn main:app"
+cmd = "gunicorn --bind=0.0.0.0:$PORT --reuse-port --workers=4 main:app"
