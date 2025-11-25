@@ -57,22 +57,24 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_pre_ping": True,
 }
 
-print("🔧 Initializing database...", file=sys.stderr)
+print("🔧 Initializing database connection...", file=sys.stderr)
 db.init_app(app)
+print("✅ Database connection configured", file=sys.stderr)
 
-try:
-    print("📦 Creating database tables...", file=sys.stderr)
-    with app.app_context():
+def init_db():
+    """Initialize database tables. Called by main.py"""
+    try:
+        print("📦 Creating database tables...", file=sys.stderr)
         import models
         print(f"✅ Models imported: {models.__name__}", file=sys.stderr)
         db.create_all()
         print("✅ Database tables created successfully!", file=sys.stderr)
-except Exception as e:
-    print(f"❌ ERROR during database initialization: {e}", file=sys.stderr)
-    import traceback
-    traceback.print_exc(file=sys.stderr)
-    sys.stderr.flush()
-    raise
+        sys.stderr.flush()
+    except Exception as e:
+        print(f"❌ ERROR during database table creation: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+        sys.stderr.flush()
 
-print("🚀 Flask app ready!", file=sys.stderr)
+print("🚀 Flask app configured and ready!", file=sys.stderr)
 sys.stderr.flush()
