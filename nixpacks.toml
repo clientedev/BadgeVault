@@ -1,9 +1,8 @@
 [phases.setup]
-nixPkgs = ["chromium", "chromedriver"]
-nixLibs = ["glib", "nss", "nspr", "atk", "cups", "gtk3", "pango", "cairo", "dbus", "libdrm", "mesa", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "expat"]
+nixPkgs = ["python311"]
 
 [phases.install]
-cmds = ["uv sync"]
+cmds = ["pip install -r requirements.txt"]
 
 [start]
-cmd = "gunicorn --bind=0.0.0.0:$PORT --timeout=120 --workers=1 main:app"
+cmd = "gunicorn --bind=0.0.0.0:$PORT --timeout=120 --workers=2 main:app"
