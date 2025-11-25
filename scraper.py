@@ -11,13 +11,19 @@ import time
 
 
 def get_selenium_driver():
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_argument('--disable-gpu')
-    driver = webdriver.Chrome(options=chrome_options)
-    return driver
+    try:
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument('--disable-gpu')
+        driver = webdriver.Chrome(options=chrome_options)
+        return driver
+    except Exception as e:
+        raise Exception(
+            f"Erro ao inicializar Chrome WebDriver: {str(e)}. "
+            "Certifique-se de que Chrome/Chromium e ChromeDriver estão instalados no servidor."
+        )
 
 
 def scrape_google_cloud_skills(url):

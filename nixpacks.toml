@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["chromium", "chromedriver"]
+
+[phases.install]
+cmds = ["uv sync"]
+
+[start]
+cmd = "gunicorn main:app"

@@ -40,7 +40,9 @@ def add_student():
         return redirect(url_for('index'))
     
     try:
+        app.logger.info(f'Tentando adicionar perfil: {profile_url}')
         data = scrape_profile(profile_url)
+        app.logger.info(f'Dados extraídos: {data}')
         
         student = Student(
             name=data['name'],
@@ -55,9 +57,11 @@ def add_student():
         flash(f'Aluno {data["name"]} adicionado com sucesso! {data["badge_count"]} badges encontradas.', 'success')
     except IntegrityError:
         db.session.rollback()
+        app.logger.error('Perfil duplicado tentou ser adicionado')
         flash('Este perfil já foi adicionado.', 'error')
     except Exception as e:
         db.session.rollback()
+        app.logger.error(f'Erro ao adicionar aluno: {str(e)}', exc_info=True)
         flash(str(e), 'error')
     
     return redirect(url_for('index'))
