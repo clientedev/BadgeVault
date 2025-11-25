@@ -125,3 +125,24 @@ Preferred communication style: Simple, everyday language.
 
 - Chrome/Chromium browser installed for Selenium scraping (✓ automatically installed)
 - ChromeDriver compatible with installed Chrome version (✓ automatically installed)
+
+## Platform Support by Hosting Provider
+
+### Replit (This Environment)
+- ✅ Google Cloud Skills Boost - Fully supported
+- ✅ Credly - Fully supported
+- ✅ Chromium/ChromeDriver - Pre-configured and working
+
+### Railway
+- ✅ Google Cloud Skills Boost - Fully supported
+- ❌ Credly - Not supported (ChromeDriver limitation in Nixpacks)
+- 📝 See `RAILWAY_DEPLOYMENT.md` for details and workarounds
+
+## Recent Changes
+
+**2024-11-25:** Migration to Replit completed
+- Added SQLite fallback for database (PostgreSQL recommended)
+- Improved error handling and logging
+- Added Railway deployment configuration
+- Fixed ChromeDriver compatibility for both Replit and Railway
+- Created comprehensive deployment documentation

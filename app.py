@@ -12,7 +12,13 @@ class Base(DeclarativeBase):
 db = SQLAlchemy(model_class=Base)
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SESSION_SECRET") or "dev-secret-key-change-in-production"
+app.secret_key = os.environ.get("SESSION_SECRET")
+if not app.secret_key:
+    raise RuntimeError(
+        "SESSION_SECRET environment variable is not set. "
+        "This is required for secure session management. "
+        "Generate a secret key with: python -c 'import secrets; print(secrets.token_hex(32))'"
+    )
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 database_url = os.environ.get("DATABASE_URL")

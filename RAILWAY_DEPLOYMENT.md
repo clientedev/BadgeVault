@@ -18,8 +18,9 @@ O arquivo `nixpacks.toml` já está configurado para instalar automaticamente o 
 Configure as seguintes variáveis de ambiente no painel do Railway:
 
 #### Obrigatórias:
-- `SESSION_SECRET` - Chave secreta para sessões Flask
+- `SESSION_SECRET` - Chave secreta para sessões Flask (OBRIGATÓRIA)
   - Gere uma chave aleatória: `python -c "import secrets; print(secrets.token_hex(32))"`
+  - **IMPORTANTE:** A aplicação não iniciará sem esta variável por motivos de segurança
 
 #### Recomendadas (PostgreSQL):
 - `DATABASE_URL` - String de conexão do banco de dados PostgreSQL
@@ -51,35 +52,44 @@ Após o deploy:
 2. Tente adicionar um perfil de aluno
 3. Verifique os logs se houver erros
 
+## ⚠️ IMPORTANTE: Limitação do Railway com Credly
+
+**O scraping de perfis do Credly NÃO funciona no Railway** devido a limitações com ChromeDriver/Selenium. 
+
+### Por quê?
+
+O Railway usa Nixpacks, mas o ChromeDriver não consegue executar corretamente mesmo com as dependências instaladas (erro: "Status code 127").
+
+### Soluções Recomendadas:
+
+#### Opção 1: Use apenas Google Cloud Skills (Recomendado)
+- Perfis do Google Cloud Skills funcionam perfeitamente no Railway
+- Não dependem do Selenium
+- São mais rápidos e confiáveis
+
+#### Opção 2: Hospede no Replit (Suporta Credly)
+- Replit tem suporte nativo para Chromium e ChromeDriver
+- Ambas plataformas (Google e Credly) funcionam
+- Fácil de configurar
+
+#### Opção 3: Use Render.com ou Heroku
+- Serviços que suportam buildpacks para Chrome
+- Adicione o buildpack: `https://github.com/heroku/heroku-buildpack-google-chrome`
+- E: `https://github.com/heroku/heroku-buildpack-chromedriver`
+
+#### Opção 4: API do Credly (Se disponível)
+- Verifique se o Credly oferece API oficial
+- Implemente integração direta sem scraping
+
 ## Troubleshooting
 
-### Erro: "Chrome WebDriver não encontrado" ou "Status code 127"
+### Erro: "Chrome WebDriver não encontrado" ou "Status code 127" (Railway + Credly)
 
-**Causas:** ChromeDriver ou Chromium não estão instalados corretamente no Railway.
+**Este é um problema conhecido e esperado no Railway.**
 
-**Soluções:**
-
-1. **Verifique o arquivo `nixpacks.toml`:** Certifique-se de que ele está presente no repositório e contém:
-```toml
-[phases.setup]
-nixPkgs = ["chromium", "chromedriver"]
-nixLibs = ["glib", "nss", "nspr", "atk", "cups", "gtk3", "pango", "cairo", "dbus", "libdrm", "mesa", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "expat"]
-
-[phases.install]
-cmds = ["uv sync"]
-
-[start]
-cmd = "gunicorn main:app"
-```
-
-2. **Verifique os logs de build:** Nos logs do Railway, procure por mensagens indicando se o Chromium foi instalado com sucesso.
-
-3. **Alternativa: Use API direta sem Selenium**
-   - Para Google Cloud Skills: A raspagem funciona sem Selenium (usa apenas requests)
-   - Para Credly: Requer Selenium. Se não funcionar no Railway, considere:
-     - Usar outro serviço de hospedagem que suporte Chromium (Render, Heroku com buildpack)
-     - Implementar raspagem alternativa
-     - Usar API oficial do Credly se disponível
+**Solução:** Veja as opções acima. Recomendamos:
+1. Usar apenas Google Cloud Skills no Railway, OU
+2. Hospedar a aplicação no Replit para suporte completo
 
 ### Erro: "Internal Server Error" ao adicionar aluno
 
@@ -99,9 +109,13 @@ cmd = "gunicorn main:app"
 
 ## Plataformas Suportadas
 
-A aplicação suporta scraping de:
-- Google Cloud Skills Boost (`cloudskillsboost.google` ou `skills.google`)
-- Credly (`credly.com`)
+### No Railway:
+- ✅ **Google Cloud Skills Boost** (`cloudskillsboost.google` ou `skills.google`) - Funciona perfeitamente
+- ❌ **Credly** (`credly.com`) - NÃO funciona (requer Selenium/ChromeDriver que não executa corretamente)
+
+### No Replit:
+- ✅ **Google Cloud Skills Boost** - Funciona
+- ✅ **Credly** - Funciona
 
 ## Recursos do Railway
 
