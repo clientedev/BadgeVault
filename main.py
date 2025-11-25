@@ -1,12 +1,8 @@
-from app import app, db, init_db
+from app import app, db
 from models import Student
 from scraper import scrape_profile
 from flask import render_template, request, redirect, url_for, flash
 from sqlalchemy.exc import IntegrityError
-
-# Initialize database tables
-with app.app_context():
-    init_db()
 
 
 @app.route('/')
