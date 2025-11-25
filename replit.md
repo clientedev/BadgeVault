@@ -140,13 +140,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-**2025-11-25:** Correções para deploy no Railway
-- Corrigido app.py para não crashar se SESSION_SECRET não estiver definido (usa fallback seguro)
-- Limpo requirements.txt removendo duplicatas e dependências não utilizadas (Selenium)
-- Atualizado nixpacks.toml para usar `pip install` ao invés de `uv sync`
-- Atualizado Procfile com configuração correta do gunicorn
-- Adicionado runtime.txt para especificar Python 3.11
-- Adicionado `lxml_html_clean` ao requirements.txt (necessário para trafilatura funcionar com lxml 5.x)
+**2025-11-25:** Correções completas para deploy no Railway
+- Removido fallback SQLite (Railway tem filesystem read-only)
+- App agora exige DATABASE_URL obrigatório
+- Adicionado conversão automática de postgres:// para postgresql://
+- requirements.txt com versões fixas para estabilidade
+- Adicionado `lxml_html_clean` para trafilatura funcionar
+- nixpacks.toml atualizado com gthread workers
+- Adicionado railway.json com configuração explícita
+- SESSION_SECRET gera automaticamente se não definido
 
 **2024-11-25:** Migration to Replit completed
 - Added SQLite fallback for database (PostgreSQL recommended)
