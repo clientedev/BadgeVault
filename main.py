@@ -14,16 +14,11 @@ def index():
     avg_badges = round(total_badges / total_students, 1) if total_students > 0 else 0
     max_badges = max((s.badge_count for s in students), default=0)
     
-    google_students = [s for s in students if 'Google' in s.platform]
-    credly_students = [s for s in students if 'Credly' in s.platform]
-    
     metrics = {
         'total_badges': total_badges,
         'total_students': total_students,
         'avg_badges': avg_badges,
-        'max_badges': max_badges,
-        'google_count': len(google_students),
-        'credly_count': len(credly_students)
+        'max_badges': max_badges
     }
     
     students_data = [s.to_dict() for s in students]

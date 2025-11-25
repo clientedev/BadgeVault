@@ -15,24 +15,25 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <div class="header-left">
-                    <div class="header-icon-wrapper">
-                        <span class="material-icons">workspace_premium</span>
-                    </div>
-                    <div class="header-text">
-                        <h1 class="header-title">Controle de Badges</h1>
-                        <div class="header-subtitle">Sistema de Acompanhamento de Certificações</div>
+                <div class="header-brand">
+                    <svg class="logo" viewBox="0 0 40 40" fill="none">
+                        <rect width="40" height="40" rx="8" fill="url(#gradient1)"/>
+                        <path d="M20 10L12 18L16 18L16 30L24 30L24 18L28 18L20 10Z" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient1" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#4285F4"/>
+                                <stop offset="100%" stop-color="#34A853"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="brand-text">
+                        <h1 class="brand-title">Google Cloud Skills</h1>
+                        <div class="brand-subtitle">Painel de Acompanhamento</div>
                     </div>
                 </div>
-                <div class="header-info">
-                    <div class="school-name">
-                        <span class="material-icons">school</span>
-                        Escola SENAI "Morvan Figueiredo" 1.03
-                    </div>
-                    <div class="teachers">
-                        <span class="material-icons">person</span>
-                        Professores: Gabriel Eduardo e Johnny Braga
-                    </div>
+                <div class="header-meta">
+                    <span class="material-icons">school</span>
+                    <span class="meta-text">SENAI Morvan Figueiredo</span>
                 </div>
             </div>
         </div>
@@ -80,7 +81,7 @@
                                     Adicionar
                                 </button>
                             </div>
-                            <p class="form-helper">Plataformas suportadas: Google Cloud Skills e Credly</p>
+                            <p class="form-helper">Cole o link do perfil público do Google Cloud Skills (cloudskillsboost.google)</p>
                         </div>
                     </form>
                 </div>
@@ -114,18 +115,6 @@
                         <div class="metric-value">{{ metrics.max_badges }}</div>
                         <div class="metric-label">Maior Pontuação</div>
                     </div>
-                    
-                    <div class="metric-card">
-                        <span class="material-icons metric-icon blue" style="font-size: 2.5rem;">cloud</span>
-                        <div class="metric-value">{{ metrics.google_count }}</div>
-                        <div class="metric-label">Google Cloud Skills</div>
-                    </div>
-                    
-                    <div class="metric-card">
-                        <span class="material-icons metric-icon green" style="font-size: 2.5rem;">workspace_premium</span>
-                        <div class="metric-value">{{ metrics.credly_count }}</div>
-                        <div class="metric-label">Credly</div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -150,7 +139,7 @@
                     <div class="chart-card">
                         <div class="chart-title">
                             <span class="material-icons" style="font-size: 1.25rem; color: #34A853;">pie_chart</span>
-                            Distribuição por Plataforma
+                            Distribuição de Badges
                         </div>
                         <div class="chart-container">
                             <canvas id="platformChart"></canvas>
@@ -186,14 +175,6 @@
                 
                 <div class="filter-section">
                     <div class="filter-controls">
-                        <div class="filter-group">
-                            <label class="filter-label">Plataforma</label>
-                            <select class="filter-select" id="platform-filter">
-                                <option value="all">Todas</option>
-                                <option value="google">Google Cloud Skills</option>
-                                <option value="credly">Credly</option>
-                            </select>
-                        </div>
                         <div class="filter-group">
                             <label class="filter-label">Ordenar por</label>
                             <select class="filter-select" id="sort-filter">
@@ -243,7 +224,7 @@
                             <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
                         <h3 class="empty-title">Adicione o primeiro aluno</h3>
-                        <p class="empty-text">Use o formulário acima para adicionar perfis de alunos do Google Cloud Skills ou Credly</p>
+                        <p class="empty-text">Use o formulário acima para adicionar perfis de alunos do Google Cloud Skills</p>
                     </div>
                 {% endif %}
             </div>
@@ -309,17 +290,21 @@
                 }
             });
             
-            // 2. Platform Distribution Chart
-            const googleCount = studentsData.filter(s => s.platform.includes('Google')).length;
-            const credlyCount = studentsData.filter(s => s.platform.includes('Credly')).length;
+            // 2. Badges Ranges Distribution Chart
+            const badgesRanges = [
+                { label: '0-10', count: studentsData.filter(s => s.badge_count <= 10).length },
+                { label: '11-20', count: studentsData.filter(s => s.badge_count >= 11 && s.badge_count <= 20).length },
+                { label: '21-30', count: studentsData.filter(s => s.badge_count >= 21 && s.badge_count <= 30).length },
+                { label: '31+', count: studentsData.filter(s => s.badge_count > 30).length }
+            ];
             
             new Chart(document.getElementById('platformChart'), {
                 type: 'doughnut',
                 data: {
-                    labels: ['Google Cloud Skills', 'Credly'],
+                    labels: badgesRanges.map(r => r.label + ' badges'),
                     datasets: [{
-                        data: [googleCount, credlyCount],
-                        backgroundColor: [googleColors.blue, googleColors.yellow],
+                        data: badgesRanges.map(r => r.count),
+                        backgroundColor: [googleColors.blue, googleColors.green, googleColors.yellow, googleColors.red],
                         borderWidth: 0
                     }]
                 },
@@ -452,7 +437,6 @@
         }
         
         // Filter functionality
-        const platformFilter = document.getElementById('platform-filter');
         const sortFilter = document.getElementById('sort-filter');
         const studentsGrid = document.querySelector('.students-grid');
         
@@ -460,27 +444,11 @@
             if (!studentsGrid) return;
             
             const cards = Array.from(studentsGrid.querySelectorAll('.student-card'));
-            const platformValue = platformFilter.value;
             const sortValue = sortFilter.value;
             
-            cards.forEach(card => {
-                const platformChip = card.querySelector('.platform-chip');
-                const platformText = platformChip.textContent.toLowerCase();
-                
-                if (platformValue === 'all') {
-                    card.style.display = 'flex';
-                } else if (platformValue === 'google' && platformText.includes('google')) {
-                    card.style.display = 'flex';
-                } else if (platformValue === 'credly' && platformText.includes('credly')) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            cards.forEach(card => card.style.display = 'flex');
             
-            const visibleCards = cards.filter(card => card.style.display !== 'none');
-            
-            visibleCards.sort((a, b) => {
+            cards.sort((a, b) => {
                 if (sortValue === 'badges-desc') {
                     const badgesA = parseInt(a.querySelector('.badge-number').textContent);
                     const badgesB = parseInt(b.querySelector('.badge-number').textContent);
@@ -497,16 +465,14 @@
                 return 0;
             });
             
-            visibleCards.forEach(card => studentsGrid.appendChild(card));
+            cards.forEach(card => studentsGrid.appendChild(card));
         }
         
         function resetFilters() {
-            platformFilter.value = 'all';
             sortFilter.value = 'recent';
             applyFilters();
         }
         
-        if (platformFilter) platformFilter.addEventListener('change', applyFilters);
         if (sortFilter) sortFilter.addEventListener('change', applyFilters);
     </script>
 </body>
