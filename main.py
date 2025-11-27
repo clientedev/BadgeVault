@@ -13,6 +13,11 @@ print("✅ Tables ready!", file=sys.stderr)
 sys.stderr.flush()
 
 
+@app.route('/health')
+def health():
+    return {'status': 'ok'}, 200
+
+
 @app.route('/')
 def index():
     students = Student.query.order_by(Student.created_at.desc()).all()
