@@ -35,17 +35,9 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 database_url = os.environ.get("DATABASE_URL")
 if not database_url:
-    print("❌ ERROR: DATABASE_URL environment variable is required!", file=sys.stderr)
-    print("", file=sys.stderr)
-    print("For Railway:", file=sys.stderr)
-    print("  1. Add a PostgreSQL plugin to your project", file=sys.stderr)
-    print("  2. Railway will automatically set DATABASE_URL", file=sys.stderr)
-    print("", file=sys.stderr)
-    print("For local development:", file=sys.stderr)
-    print("  export DATABASE_URL='postgresql://user:pass@host:5432/dbname'", file=sys.stderr)
-    print("=" * 60, file=sys.stderr)
-    sys.stderr.flush()
-    raise RuntimeError("DATABASE_URL environment variable is required")
+    print("⚠️ WARNING: DATABASE_URL not set. Using SQLite fallback.", file=sys.stderr)
+    database_url = "sqlite:///local_database.db"
+    print("  For production, please set DATABASE_URL environment variable.", file=sys.stderr)
 
 if database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
