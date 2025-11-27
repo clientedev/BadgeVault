@@ -1,0 +1,173 @@
+Source
+Source Repo
+clientedev/BadgeVault
+
+
+
+Disconnect
+Add Root Directory (used for build and deploy steps. Docs↗)
+Branch connected to production
+Changes made to this GitHub branch will be automatically pushed to this environment.
+main
+
+Disconnect
+Wait for CI
+Trigger deployments after all GitHub actions have completed successfully.
+
+Networking
+Public Networking
+Access your application over HTTP with the following domains
+web-production-bc2b.up.railway.app
+Metal Edge
+
+
+
+
+Domain
+web-production-bc2b
+.up.railway.app
+
+Edit Port
+Update your domain or choose a target port
+
+
+Cancel
+
+Update
+www.badgemonitor.cloud
+
+
+
+Port 8080
+
+ · 
+Metal Edge
+ · Setup complete
+
+Domain
+www.badgemonitor.cloud
+Custom port
+Enter the port your app is listening on
+
+Target port
+8080
+Update your target port
+
+
+Cancel
+
+Update
+Connect to your service over TCP using a proxied domain and port
+caboose.proxy.rlwy.net:32853
+
+:8000
+
+
+
+
+Custom Domain
+Private Networking
+Communicate with this service from within the Railway network.
+web.railway.internal
+IPv4 & IPv6
+Ready to talk privately ·
+You can also simply call me
+web
+.
+
+DNS
+web
+.railway.internal
+
+Endpoint name available!
+
+
+Cancel
+
+Update
+Build
+Builder
+
+Railpack
+
+Default
+
+App builder developed by Railway. Docs↗
+
+Metal Build Environment
+Beta
+
+Metal
+
+Use our new Metal-based build environment. The new Metal build environment is faster and will be the default for all builds in the coming months.
+
+We cannot guarantee 100% compatibility yet. We warn against using this in production for now.
+
+
+Custom Build Command
+Override the default build command that is run when building your app. Docs↗
+
+Build Command
+Watch Paths
+Gitignore-style rules to trigger a new deployment based on what file paths have changed. Docs↗
+Add pattern
+Add pattern e.g. /src/**
+
+Deploy
+Custom Start Command
+Command that will be run to start new deployments. Docs↗
+Start command
+gunicorn --bind=0.0.0.0:$PORT --timeout=120 --workers=2 --threads=2 --worker-class=gthread main:app
+Add pre-deploy step (Docs↗)
+Regions
+Configure how many instances of this service are deployed in each region.
+US East (Virginia, USA)
+
+Replicas
+1
+Instance
+Multi-region replicas are only available on the Pro plan.
+
+Learn More↗
+Teardown
+Configure old deployment termination when a new one is started. Docs↗
+
+Resource Limits
+Max amount of vCPU and Memory to allocate to each replica for this service.
+CPU: 8 vCPU
+
+Plan limit: 8 vCPU
+
+Memory: 8 GB
+
+Plan limit: 8 GB
+
+Increase your resources
+Cron Schedule
+Run the service according to the specified cron schedule.
+
+Cron Schedule
+Healthcheck Path
+Endpoint to be called before a deploy completes to ensure the new deployment is live. Docs↗
+
+Healthcheck Path
+Serverless
+Containers will scale down to zero and then scale up based on traffic. Requests while the container is sleeping will be queued and served when the container wakes up. Docs↗
+
+Restart Policy
+Configure what to do when the process exits. Docs↗
+On Failure
+
+Restart the container if it exits with a non-zero exit code.
+
+
+Number of times to try and restart the service if it stopped due to an error.
+Max restart retries
+10
+Config-as-code
+Railway Config File
+Manage your build and deployment settings through a config file. Docs↗
+
+Add File Path
+Delete Service
+Deleting this service will permanently delete all its deployments and remove it from this environment. This cannot be undone.
